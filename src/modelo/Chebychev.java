@@ -12,6 +12,8 @@ public class Chebychev extends Knn{
 		Imagem [] menord = new Imagem[g];
 		float soma = 0;
 		float aux = 0;
+		float aux3 = 0;
+		int aux4 = 0;
 		float max = 0;
 		int aux2 = 0;
 		int contperson = 0;
@@ -64,6 +66,24 @@ public class Chebychev extends Knn{
 			else{
 				contnotperson = contnotperson + 1;
 			}
+			if(i == 0) {
+				aux3 = menores[i];
+			}
+			else {
+				if(menores[i] < aux3) {
+					aux3 = menores[i];
+					aux4 = i;
+				}
+			}
+		}
+		if(contperson == contnotperson) {
+			if(menord[aux4].getClasse().equals(person)) {
+				return "há pessoas";
+			}
+			else{
+				return "não há pessoas";
+			}
+			
 		}
 		if (contperson > contnotperson) {
 			return "há pessoas";

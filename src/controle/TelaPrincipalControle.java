@@ -1,6 +1,7 @@
 package controle;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +19,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -80,6 +83,10 @@ public class TelaPrincipalControle implements Initializable{
 
     @FXML
     private Button pesquisar2;
+    
+    @FXML
+    private ImageView imgview;
+
 
     
     @FXML
@@ -148,18 +155,32 @@ public class TelaPrincipalControle implements Initializable{
 
     @FXML
     public void selecionarDataset(ActionEvent event) {
-    	FileChooser fc = new FileChooser();
-    	fc.getExtensionFilters().add(new ExtensionFilter("Arquivos CSV", "*.csv"));
-    	File f = fc.showOpenDialog(null);
-    	txtDataset.setText(f.getAbsolutePath());
+    	try{
+    		lbl5.setText("");
+    		FileChooser fc = new FileChooser();
+    		fc.getExtensionFilters().add(new ExtensionFilter("Arquivos CSV", "*.csv"));
+        	File f = fc.showOpenDialog(null);
+        	txtDataset.setText(f.getAbsolutePath());
+    	}catch(NullPointerException n) {
+    		lbl5.setText("Selecione um arquivo dataset no formato csv!!!");
+    	}
+    	    	
     }
 
     @FXML
-    public void selecionarImagem(ActionEvent event) {
-    	FileChooser fc = new FileChooser();
-    	fc.getExtensionFilters().add(new ExtensionFilter("Arquivos PNG", "*.png"));
-    	File f = fc.showOpenDialog(null);
-    	txtImagem.setText(f.getAbsolutePath());
+    public void selecionarImagem(ActionEvent event) throws FileNotFoundException {
+    	try{
+    		lbl6.setText("");
+    		FileChooser fc = new FileChooser();
+    		fc.getExtensionFilters().add(new ExtensionFilter("Arquivos PNG", "*.png"));
+        	File f = fc.showOpenDialog(null);
+        	txtImagem.setText(f.getAbsolutePath());
+        	Image image = new Image(new FileInputStream(f.getAbsolutePath()));
+        	imgview.setImage(image);
+    	}catch(NullPointerException n) {
+    		lbl6.setText("Selecione uma imagem!!!");
+    		imgview.setImage(null);
+    	}
     }
 
     

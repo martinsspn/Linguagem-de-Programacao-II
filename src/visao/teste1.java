@@ -17,7 +17,7 @@ public class teste1 extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		Pane root = FXMLLoader.load(getClass().getResource("TelaPrincipal.fxml"));
-		Scene scene = new Scene(root, 500, 500);
+		Scene scene = new Scene(root, 502, 676);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

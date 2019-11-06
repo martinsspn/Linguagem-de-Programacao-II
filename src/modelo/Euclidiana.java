@@ -12,8 +12,10 @@ public class Euclidiana extends Knn {
 		Imagem [] menord = new Imagem[g];
 		float soma = 0;
 		float aux = 0;
+		float aux3 = 0;
 		float dif = 0;
 		int aux2 = 0;
+		int aux4 = 0;
 		int contperson = 0;
 		int contnotperson = 0;
 		String person = listaImagens.get(0).getClasse();
@@ -59,7 +61,26 @@ public class Euclidiana extends Knn {
 			else{
 				contnotperson = contnotperson + 1;
 			}
+			if(i == 0) {
+				aux3 = menores[i];
+			}
+			else {
+				if(menores[i] < aux3) {
+					aux3 = menores[i];
+					aux4 = i;
+				}
+			}
 		}
+		if(contperson == contnotperson) {
+			if(menord[aux4].getClasse().equals(person)) {
+				return "há pessoas";
+			}
+			else{
+				return "não há pessoas";
+			}
+			
+		}
+		
 		if (contperson > contnotperson) {
 			return "há pessoas";
 		}

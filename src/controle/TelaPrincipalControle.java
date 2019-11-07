@@ -90,7 +90,7 @@ public class TelaPrincipalControle implements Initializable{
 
     
     @FXML
-    private void acaoBotao1(ActionEvent event) throws FileNotFoundException, IOException {
+    private void acaoBotao1(ActionEvent event) throws FileNotFoundException, IOException, NumberFormatException {
     	String metrica = choice.getSelectionModel().getSelectedItem();
     	int k;
     	try{
@@ -98,7 +98,7 @@ public class TelaPrincipalControle implements Initializable{
     		lbl5.setText("");
     		lbl6.setText("");
     		k =  Integer.parseInt(txtK.getText());
-    		TratamentoImagem tratamento = new TratamentoImagem();
+       		TratamentoImagem tratamento = new TratamentoImagem();
 	    	String caminhoImagem = txtImagem.getText();
 	    	String caminhoLeitura = txtDataset.getText();
 	    	Leitura leitura = new Leitura(caminhoLeitura);
@@ -106,6 +106,9 @@ public class TelaPrincipalControle implements Initializable{
 			while(leitura.lerLinhas() != 1) {
 				Imagem imagem = new Imagem(leitura.getLista(), leitura.getClasse());
 				imagens.add(imagem);
+			}
+			if(k > imagens.size() || k <= 0) {
+				throw new NumberFormatException();
 			}
 	    	Knn a = new Euclidiana();
 			Knn b = new Manhattan();
@@ -123,7 +126,7 @@ public class TelaPrincipalControle implements Initializable{
 				default: lbl3.setText("Selecione uma métrica!!!");
 			}
     	}catch(NumberFormatException n) {
-    		lbl4.setText("Digite um valor inteiro!!!");
+    		lbl4.setText("Digite um valor inteiro válido!!!");
     		lbl1.setText("");
     		lbl2.setText("");
     		lbl3.setText("");
